@@ -4,84 +4,199 @@ using namespace std;
 
 int main()
 {
-	double* mv = new double[4];
-	double* mvn = new double[3];
-	for (int i = 0; i < 4; i++) mv[i] = i + 3;
-	for (int i = 0; i < 3; i++) mvn[i] = i + 3;
-	TVector<double> v1(mv, 4, 0);
-	TVector<double> v2(v1);
-	TVector<double> v3(4, 0);
-	TVector<double> vn(3, 0);
-	v3 = v1 + 5;
-	cout << v3 << endl;
-	v3 = v1 - 5;
-	cout << v3 << endl;
-	v3 = v1 * 5;
-	cout << v3 << endl;
-	try {
-		v3 = v1 + vn;
-		cout << v3 << endl;
-	}
-	catch (char* str) {
-		cout << str << endl;
-	}
-	try {
-		v3 = v1 - v2;
-		cout << v3 << endl;
-	}
-	catch (char* str) {
-		cout << str << endl;
-	}
-	try {
-		cout << v1 * v2 << endl;
-	}
-	catch (char* str) {
-		cout << str << endl;
-	}
-	int b = v1 == v2;
-	cout << b << endl;
-	b = v3 != v2;
-	cout << b << endl;
-	cout << v3[2] << endl;
-	TMatrix<double> m1(4);
-	TVector<TVector<double> > v(4, 0);
-	for (int i = 0; i < 4; i++) {
-		TVector<double> tmp(4 - i, i);
-		cin >> tmp;
-		v[i] = tmp;
-	}
-	cout << v << endl;
-	TMatrix<double> m2(v);
-	TMatrix<double> m3(m2);
-	m1 = m2 + 5;
-	cout << m1 << endl;
-	m1 = m2 - 5;
-	cout << m1 << endl;
-	m1 = m2 * 5;
-	cout << m1 << endl;
-	try {
-		m1 = m2 + m3;
-		cout << m1 << endl;
-	}
-	catch (char* str) {
-		cout << str << endl;
-	}
-	try {
-		m1 = m2 - m3;
-		cout << m1 << endl;
-	}
-	catch (char* str) {
-		cout << str << endl;
-	}
-	try {
-		v3 = m2 * v2;
-		cout << v3 << endl;
-	}
-	catch (char* str) {
-		cout << str << endl;
-	}
-	b = m2 == m3;
-	cout << b << endl;
-	b = m1 != m2;
-	cout << b << endl;
+	int test, n;
+	TMatrix<double> A(n);
+	TMatrix<double> B(n);
+	TMatrix<double> C(n);
+	do
+	{
+		cin >> test;
+		switch (test)
+		{
+		case 1:
+			cout << "TEST 1" << endl << "A + B" << endl;
+			cout << "Size A = ";
+			cin >> n;
+			cout << "A = " << endl;
+			cin >> A; cout << A;
+			cout << "Size B = ";
+			cin >> n;
+			cout << "B = " << endl;
+			cin >> B;
+			cout << "A + B" << endl;
+			try
+			{
+				C = A + B;
+				cout << C;
+			}
+			catch (const char* er)
+			{
+				cout << er << endl;
+			}
+			cout << "TEST 1 !" << endl << endl;
+			break;
+		case 2:
+			cout << "TEST 2" << endl << "A - B" << endl;
+			cout << "Size A = ";
+			cin >> n;
+			cout << "A = " << endl;
+			cin >> A;
+			cout << "Size B = ";
+			cin >> n;
+			cout << "B = " << endl;
+			cin >> B;
+			cout << "A - B" << endl;;
+			try
+			{
+				C = A - B;
+				cout << C;
+			}
+			catch (const char* er)
+			{
+				cout << er << endl;
+			}
+			cout << "TEST 2!" << endl << endl;
+			break;
+		case 3:
+			cout << "TEST 3" << endl << "A * B" << endl;
+			cout << "Size A = ";
+			cin >> n;
+			cout << "A = " << endl;
+			cin >> A;
+			cout << "Size B = ";
+			cin >> n;
+			cout << "B = " << endl;
+			cin >> B;
+			cout << "A * B" << endl;
+			try
+			{
+				C = A * B;
+				cout << C;
+			}
+			catch (const char* er)
+			{
+				cout << er << endl;
+			}
+			cout << "TEST 3!" << endl << endl;
+			break;
+		case 4:
+			cout << "TEST 4" << endl << "A + const" << endl;
+			cout << "Size A = ";
+			cin >> n;
+			cout << "A = " << endl;
+			cin >> A;
+			cout << "Const = ";
+			double c;
+			cin >> c;
+			cout << "A + const" << endl;
+			C = A + c;
+			cout << C;
+			cout << "TEST 4!" << endl << endl;
+			break;
+		case 5:
+			cout << "TEST 5" << endl << "A - const" << endl;
+			cout << "Size A = ";
+			cin >> n;
+			cout << "A = " << endl;
+			cin >> A;
+			cout << "Const = ";
+			cin >> c;
+			cout << "A - const" << endl;
+			C = A - c;
+			cout << C;
+			cout << "TEST 5!" << endl << endl;
+			break;
+		case 6:
+			cout << "TEST 6" << endl << "A * const" << endl;
+			cout << "Size A = ";
+			cin >> n;
+			cout << "A = " << endl;
+			cin >> A;
+			cout << "Const = ";
+			cin >> c;
+			cout << "A * const" << endl;
+			C = A * c;
+			cout << C;
+			cout << "TEST 6!" << endl << endl;
+			break;
+		case 7:
+			cout << "TEST 7" << endl << "A * vec" << endl;
+			cout << "Size A = ";
+			int v;
+			cin >> n;
+			cout << "A = " << endl;
+			cin >> A;
+			cout << "Size vec = ";
+			cin >> n;
+			cout << "B = " << endl;
+			cin >> v;
+			cout << "A * vec" << endl;
+			try
+			{
+				C = A * v;
+				cout << C;
+			}
+			catch (const char* er)
+			{
+				cout << er << endl;
+			}
+			cout << "TEST 7!" << endl << endl;
+			break;
+		case 8:
+			cout << "TEST 8" << endl << "A == B" << endl;
+			cout << "Size A = ";
+			cin >> n;
+			cout << "A = " << endl;
+			cin >> A;
+			cout << "Size B = ";
+			cin >> n;
+			cout << "B = " << endl;
+			cin >> B;
+			try
+			{
+				if (A == B)
+					cout << "A = B" << endl;
+				else
+					cout << "A != B" << endl;
+			}
+			catch (const char* er)
+			{
+				cout << er << endl;
+			}
+			cout << "TEST 8!" << endl << endl;
+			break;
+		case 9:
+			cout << "TEST 9" << endl << "A != B" << endl;
+			int n;
+			cout << "Size A = ";
+			cin >> n;
+			cout << "A = " << endl;
+			cin >> A;
+			cout << "Size B = ";
+			cin >> n;
+			cout << "B = " << endl;
+			cin >> B;
+			try
+			{
+				if (A != B)
+					cout << "A != B" << endl;
+				else
+					cout << "A = B" << endl;
+			}
+			catch (const char* er)
+			{
+				cout << er << endl;
+			}
+			cout << "TEST 9!" << endl << endl;
+			break;
+		case 10:
+			cout << "TEST 10" << endl << "A = B" << endl;
+			cout << "Size A = ";
+			cin >> n;
+			cout << "A = " << endl;
+			cin >> A;
+			cout << B;
+			break;
+		}
+	} while (test != 0);
 }
