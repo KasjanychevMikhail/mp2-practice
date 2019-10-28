@@ -1,6 +1,7 @@
 #pragma once
 #include <math.h>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -12,9 +13,8 @@ protected:
 	ValueType* arr;
 	int startIndex;
 public:
-	TVector();
-	TVector(int _size, int _startIndex);
-	TVector(const TVector&);
+	TVector(int _size = 10, int _startIndex = 0);
+	TVector(const TVector& vec);
 	~TVector();
 
 	ValueType Len() const;
@@ -39,19 +39,21 @@ public:
 			in >> vec.arr[i];
 		return in;
 	}
-	friend ostream& operator<<(ostream & out, const TVector<ValueType> & vec)
+	friend ostream& operator<<(ostream& out, const TVector<ValueType>& vec)
 	{
 		for (int i = 0; i < vec.startIndex; i++)
-			out << "0 ";
-		for (int i = 0; i < vec.size; i++)
-			out << vec.arr[i] << " ";
+			out << setw(3) << setprecision(3) << right << " ";
+		for (int i = 0; i < vec.size - 1; i++)
+		{
+			out << setw(3) << setprecision(1) << right << vec.arr[i];
+		}
+		out << setw(3) << setprecision(1) << right << vec.arr[vec.size - 1];
 		return out;
+		out << setw(vec.startIndex);
 	}
 };
 
-template <typename ValueType>
-TVector<ValueType>::TVector()
-{}
+
 template <typename ValueType>
 TVector<ValueType>::TVector(int _size, int _startIndex)
 {
@@ -63,7 +65,7 @@ template <typename ValueType>
 TVector<ValueType>::TVector(const TVector<ValueType> & vec)
 {
 	this->size = vec.size;
-	this->startindex = vec.startindex;
+	this->startIndex = vec.startIndex;
 	this->arr = new ValueType[this->size];
 	for (int i = 0; i < this->size; i++)
 		this->arr[i] = vec.arr[i];

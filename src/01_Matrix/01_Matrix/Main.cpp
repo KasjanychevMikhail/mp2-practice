@@ -2,201 +2,320 @@
 #include "TMatrix.h"
 using namespace std;
 
+void Slozh()
+{
+	cout << "Slozhenie" << endl << "A + B" << endl;
+	int n;
+	cout << "Size A = ";
+	cin >> n;
+	TMatrix<double> A(n);
+	cout << "A = " << endl;
+	cin >> A; cout << A;
+
+	cout << "Size B = ";
+	cin >> n;
+	TMatrix<double> B(n);
+	cout << "B = " << endl;
+	cin >> B;
+	cout << "A + B" << endl;
+	TMatrix<double> C(n);
+	try
+	{
+		C = A + B;
+		cout << C;
+	}
+	catch (const char* osh)
+	{
+		cout << osh << endl;
+	}
+	cout << "Zaversheno" << endl << endl;
+}
+
+void Raz()
+{
+	cout << "Vichitanie" << endl << "A - B" << endl;
+	int n;
+	cout << "Size A = ";
+	cin >> n;
+	TMatrix<double> A(n);
+	cout << "A = " << endl;
+	cin >> A;
+
+	cout << "Size B = ";
+	cin >> n;
+	TMatrix<double> B(n);
+	cout << "B = " << endl;
+	cin >> B;
+
+	cout << "A - B" << endl;
+	TMatrix<double> C(n);
+	try
+	{
+		C = A - B;
+		cout << C;
+	}
+	catch (const char* osh)
+	{
+		cout << osh << endl;
+	}
+	cout << "Zaversheno" << endl << endl;
+}
+
+void Umnozh()
+{
+	cout << "Umnozhenie" << endl << "A * B" << endl;
+	int n;
+	cout << "Size A = ";
+	cin >> n;
+	TMatrix<double> A(n);
+	cout << "A = " << endl;
+	cin >> A;
+
+	cout << "Size B = ";
+	cin >> n;
+	TMatrix<double> B(n);
+	cout << "B = " << endl;
+	cin >> B;
+
+	cout << "A * B" << endl;
+	TMatrix<double> C(n);
+	try
+	{
+		C = A * B;
+		cout << C;
+	}
+	catch (const char* osh)
+	{
+		cout << osh << endl;
+	}
+	cout << "Zaversheno" << endl << endl;
+}
+
+void SlConst()
+{
+	cout << "Slozhenie s const" << endl << "A + const" << endl;
+	int n;
+	cout << "Size A = ";
+	cin >> n;
+	TMatrix<double> A(n);
+	cout << "A = " << endl;
+	cin >> A;
+
+	cout << "Const = ";
+	double c;
+	cin >> c;
+
+	cout << "A + const" << endl;
+	TMatrix<double> C(n);
+	C = A + c;
+	cout << C;
+	cout << "Zaversheno" << endl << endl;
+}
+
+void MiConst()
+{
+	cout << "Vichitanie const" << endl << "A - const" << endl;
+	int n;
+	cout << "Size A = ";
+	cin >> n;
+	TMatrix<double> A(n);
+	cout << "A = " << endl;
+	cin >> A;
+
+	cout << "Const = ";
+	double c;
+	cin >> c;
+
+	cout << "A - const" << endl;
+	TMatrix<double> C(n);
+	C = A - c;
+	cout << C;
+	cout << "Zaversheno" << endl << endl;
+}
+
+void UmConst()
+{
+	cout << "Umnozhenie na const" << endl << "A * const" << endl;
+	int n;
+	cout << "Size A = ";
+	cin >> n;
+	TMatrix<double> A(n);
+	cout << "A = " << endl;
+	cin >> A;
+
+	cout << "Const = ";
+	double c;
+	cin >> c;
+
+	cout << "A * const" << endl;
+	TMatrix<double> C(n);
+	C = A * c;
+	cout << C;
+	cout << "Zaversheno" << endl << endl;
+}
+
+void UmVec()
+{
+	cout << "Umnozhenie na vector" << endl << "A * vec" << endl;
+	int n;
+	cout << "Size A = ";
+	cin >> n;
+	TMatrix<double> A(n);
+	cout << "A = " << endl;
+	cin >> A;
+
+	cout << "Size vec = ";
+	cin >> n;
+	TVector<double> v(n);
+	cout << "B = " << endl;
+	cin >> v;
+
+	cout << "A * vec" << endl;
+	TVector<double> C(n);
+	try
+	{
+		C = A * v;
+		cout << C;
+	}
+	catch (const char* osh)
+	{
+		cout << osh << endl;
+	}
+	cout << "Zaversheno" << endl << endl;
+}
+
+void Rav()
+{
+	cout << "Sravnenie na ravenstvo" << endl << "A == B" << endl;
+	int n;
+	cout << "Size A = ";
+	cin >> n;
+	TMatrix<double> A(n);
+	cout << "A = " << endl;
+	cin >> A;
+
+	cout << "Size B = ";
+	cin >> n;
+	TMatrix<double> B(n);
+	cout << "B = " << endl;
+	cin >> B;
+
+	try
+	{
+		if (A == B)
+			cout << "A = B" << endl;
+		else
+			cout << "A != B" << endl;
+	}
+	catch (const char* osh)
+	{
+		cout << osh << endl;
+	}
+	cout << "Zaversheno" << endl << endl;
+}
+
+void Nerav()
+{
+	cout << "Sravnenie na neravenstvo" << endl << "A != B" << endl;
+	int n;
+	cout << "Size A = ";
+	cin >> n;
+	TMatrix<double> A(n);
+	cout << "A = " << endl;
+	cin >> A;
+
+	cout << "Size B = ";
+	cin >> n;
+	TMatrix<double> B(n);
+	cout << "B = " << endl;
+	cin >> B;
+
+	try
+	{
+		if (A != B)
+			cout << "A != B" << endl;
+		else
+			cout << "A = B" << endl;
+	}
+	catch (const char* osh)
+	{
+		cout << osh << endl;
+	}
+	cout << "Zaversheno" << endl << endl;
+}
+
+void Pris()
+{
+	cout << "Prisvaivanie" << endl << "A = B" << endl;
+	int n;
+	cout << "Size A = ";
+	cin >> n;
+	TMatrix<double> A(n);
+	cout << "A = " << endl;
+	cin >> A;
+	TMatrix<double> B(A);
+	cout << B;
+}
+
 int main()
 {
-	int test, n;
-	TMatrix<double> A(n);
-	TMatrix<double> B(n);
-	TMatrix<double> C(n);
+	int n;
 	do
 	{
-		cin >> test;
-		switch (test)
+		cout << "1 - Slozhenie" << endl << "2 - Vichitanie" << endl << "3 - Umnozhenie" << endl << "4 - Slozhenie s const" << endl << "5 - Vichitanie const" << endl << "6 - Umnozhenie na const" << endl << "7 - Umnozhenie na vector" << endl << "8 - Sravnenie na ravenstvo" << endl << "9 - Sravnenie na neravenstvo" << endl << "10 - Prisvaivanie" << endl;
+		cin >> n;
+		switch (n)
 		{
 		case 1:
-			cout << "TEST 1" << endl << "A + B" << endl;
-			cout << "Size A = ";
-			cin >> n;
-			cout << "A = " << endl;
-			cin >> A; cout << A;
-			cout << "Size B = ";
-			cin >> n;
-			cout << "B = " << endl;
-			cin >> B;
-			cout << "A + B" << endl;
-			try
-			{
-				C = A + B;
-				cout << C;
-			}
-			catch (const char* er)
-			{
-				cout << er << endl;
-			}
-			cout << "TEST 1 !" << endl << endl;
-			break;
-		case 2:
-			cout << "TEST 2" << endl << "A - B" << endl;
-			cout << "Size A = ";
-			cin >> n;
-			cout << "A = " << endl;
-			cin >> A;
-			cout << "Size B = ";
-			cin >> n;
-			cout << "B = " << endl;
-			cin >> B;
-			cout << "A - B" << endl;;
-			try
-			{
-				C = A - B;
-				cout << C;
-			}
-			catch (const char* er)
-			{
-				cout << er << endl;
-			}
-			cout << "TEST 2!" << endl << endl;
-			break;
-		case 3:
-			cout << "TEST 3" << endl << "A * B" << endl;
-			cout << "Size A = ";
-			cin >> n;
-			cout << "A = " << endl;
-			cin >> A;
-			cout << "Size B = ";
-			cin >> n;
-			cout << "B = " << endl;
-			cin >> B;
-			cout << "A * B" << endl;
-			try
-			{
-				C = A * B;
-				cout << C;
-			}
-			catch (const char* er)
-			{
-				cout << er << endl;
-			}
-			cout << "TEST 3!" << endl << endl;
-			break;
-		case 4:
-			cout << "TEST 4" << endl << "A + const" << endl;
-			cout << "Size A = ";
-			cin >> n;
-			cout << "A = " << endl;
-			cin >> A;
-			cout << "Const = ";
-			double c;
-			cin >> c;
-			cout << "A + const" << endl;
-			C = A + c;
-			cout << C;
-			cout << "TEST 4!" << endl << endl;
-			break;
-		case 5:
-			cout << "TEST 5" << endl << "A - const" << endl;
-			cout << "Size A = ";
-			cin >> n;
-			cout << "A = " << endl;
-			cin >> A;
-			cout << "Const = ";
-			cin >> c;
-			cout << "A - const" << endl;
-			C = A - c;
-			cout << C;
-			cout << "TEST 5!" << endl << endl;
-			break;
-		case 6:
-			cout << "TEST 6" << endl << "A * const" << endl;
-			cout << "Size A = ";
-			cin >> n;
-			cout << "A = " << endl;
-			cin >> A;
-			cout << "Const = ";
-			cin >> c;
-			cout << "A * const" << endl;
-			C = A * c;
-			cout << C;
-			cout << "TEST 6!" << endl << endl;
-			break;
-		case 7:
-			cout << "TEST 7" << endl << "A * vec" << endl;
-			cout << "Size A = ";
-			int v;
-			cin >> n;
-			cout << "A = " << endl;
-			cin >> A;
-			cout << "Size vec = ";
-			cin >> n;
-			cout << "B = " << endl;
-			cin >> v;
-			cout << "A * vec" << endl;
-			try
-			{
-				C = A * v;
-				cout << C;
-			}
-			catch (const char* er)
-			{
-				cout << er << endl;
-			}
-			cout << "TEST 7!" << endl << endl;
-			break;
-		case 8:
-			cout << "TEST 8" << endl << "A == B" << endl;
-			cout << "Size A = ";
-			cin >> n;
-			cout << "A = " << endl;
-			cin >> A;
-			cout << "Size B = ";
-			cin >> n;
-			cout << "B = " << endl;
-			cin >> B;
-			try
-			{
-				if (A == B)
-					cout << "A = B" << endl;
-				else
-					cout << "A != B" << endl;
-			}
-			catch (const char* er)
-			{
-				cout << er << endl;
-			}
-			cout << "TEST 8!" << endl << endl;
-			break;
-		case 9:
-			cout << "TEST 9" << endl << "A != B" << endl;
-			int n;
-			cout << "Size A = ";
-			cin >> n;
-			cout << "A = " << endl;
-			cin >> A;
-			cout << "Size B = ";
-			cin >> n;
-			cout << "B = " << endl;
-			cin >> B;
-			try
-			{
-				if (A != B)
-					cout << "A != B" << endl;
-				else
-					cout << "A = B" << endl;
-			}
-			catch (const char* er)
-			{
-				cout << er << endl;
-			}
-			cout << "TEST 9!" << endl << endl;
-			break;
-		case 10:
-			cout << "TEST 10" << endl << "A = B" << endl;
-			cout << "Size A = ";
-			cin >> n;
-			cout << "A = " << endl;
-			cin >> A;
-			cout << B;
+		{
+			Slozh();
 			break;
 		}
-	} while (test != 0);
+		case 2:
+		{
+			Raz();
+			break;
+		}
+		case 3:
+		{
+			Umnozh();
+			break;
+		}
+		case 4:
+		{
+			SlConst();
+			break;
+		}
+		case 5:
+		{
+			MiConst();
+			break;
+		}
+		case 6:
+		{
+			UmConst();
+			break;
+		}
+		case 7:
+		{
+			UmVec();
+			break;
+		}
+		case 8:
+		{
+			Rav();
+			break;
+		}
+		case 9:
+		{
+			Nerav();
+			break;
+		}
+		case 10:
+		{
+			Pris();
+			break;
+		}
+		}
+	} while (n != 0);
 }

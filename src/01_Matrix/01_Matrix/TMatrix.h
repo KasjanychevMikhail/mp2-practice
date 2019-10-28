@@ -57,7 +57,7 @@ TMatrix<ValueType>::~TMatrix()
 {}
 
 template<typename ValueType>
-TMatrix<ValueType>& TMatrix<ValueType>::operator=(const TMatrix & mat)
+TMatrix<ValueType>& TMatrix<ValueType>::operator=(const TMatrix<ValueType> & mat)
 {
 	if (*this == mat)
 		return *this;
