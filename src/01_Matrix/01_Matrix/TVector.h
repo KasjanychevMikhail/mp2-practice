@@ -45,9 +45,9 @@ public:
 			out << setw(3) << setprecision(3) << right << " ";
 		for (int i = 0; i < vec.size - 1; i++)
 		{
-			out << setw(3) << setprecision(1) << right << vec.arr[i];
+			out << setw(3) << setprecision(3) << right << vec.arr[i];
 		}
-		out << setw(3) << setprecision(1) << right << vec.arr[vec.size - 1];
+		out << setw(3) << setprecision(3) << right << vec.arr[vec.size - 1];
 		return out;
 		out << setw(vec.startIndex);
 	}
@@ -87,21 +87,23 @@ ValueType TVector<ValueType>::Len() const
 template <typename ValueType>
 TVector<ValueType>& TVector<ValueType>::operator=(const TVector<ValueType> & vec)
 {
-	if (vec == *this)
+	if (*this == vec)
 		return *this;
-	if (size != vec.size)
+	if (this->size != vec.size)
 	{
-		delete[] arr;
-		size = vec.size;
-		arr = new ValueType[size];
+		this->size = vec.size;
+		delete this->arr;
+		this->arr = new ValueType[this->size];
 	}
-	memcpy(vec.arr, arr, sizeof(ValueType) * size);
+	this->startIndex = vec.startIndex;
+	for (int i = 0; i < this->size; i++)
+		this->arr[i] = vec.arr[i];
 	return *this;
 }
 template <typename ValueType>
 TVector<ValueType> TVector<ValueType>::operator+(ValueType a)
 {
-	TVector<ValueType> rez(this->size);
+	TVector<ValueType> rez(*this);
 	for (int i = 0; i < this->size; i++)
 		rez.arr[i] += a;
 	return rez;
@@ -109,7 +111,7 @@ TVector<ValueType> TVector<ValueType>::operator+(ValueType a)
 template <typename ValueType>
 TVector<ValueType> TVector<ValueType>::operator-(ValueType a)
 {
-	TVector<ValueType> rez(this->size);
+	TVector<ValueType> rez(*this);
 	for (int i = 0; i < this->size; i++)
 		rez.arr[i] -= a;
 	return rez;
@@ -117,7 +119,7 @@ TVector<ValueType> TVector<ValueType>::operator-(ValueType a)
 template <typename ValueType>
 TVector<ValueType> TVector<ValueType>::operator*(ValueType a)
 {
-	TVector<ValueType> rez(this->size);
+	TVector<ValueType> rez(*this);
 	for (int i = 0; i < this->size; i++)
 		rez.arr[i] *= a;
 	return rez;
