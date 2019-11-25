@@ -32,6 +32,7 @@ public:
 
 	int GetStartInd() const;
 	int GetSize() const;
+	void SSI(int a);
 
 	friend istream& operator>>(istream& in, TVector<ValueType>& vec)
 	{
@@ -42,12 +43,12 @@ public:
 	friend ostream& operator<<(ostream& out, const TVector<ValueType>& vec)
 	{
 		for (int i = 0; i < vec.startIndex; i++)
-			out << setw(3) << setprecision(3) << right << " ";
+			out << setw(3) << setprecision(2) << right << " ";
 		for (int i = 0; i < vec.size - 1; i++)
 		{
-			out << setw(3) << setprecision(3) << right << vec.arr[i];
+			out << setw(3) << setprecision(2) << right << vec.arr[i];
 		}
-		out << setw(3) << setprecision(3) << right << vec.arr[vec.size - 1];
+		out << setw(3) << setprecision(2) << right << vec.arr[vec.size - 1];
 		return out;
 		out << setw(vec.startIndex);
 	}
@@ -173,12 +174,7 @@ bool TVector<ValueType>::operator==(const TVector<ValueType>& vec)const
 template<typename ValueType>
 bool TVector<ValueType>::operator!=(const TVector<ValueType>& vec)const
 {
-	if ((this->size != vec.size) || (this->startIndex != vec.startIndex))
-		return true;
-	for (int i = 0; i < vec.size; i++)
-		if (this->arr[i] != vec.arr[i])
-			return true;
-	return false;
+	return (!(*this == vec));
 }
 template<typename ValueType>
 ValueType& TVector<ValueType>::operator[](int i)
@@ -203,4 +199,9 @@ template<typename ValueType>
 int TVector<ValueType>::GetSize()const
 {
 	return this->size;
+}
+template<typename ValueType>
+void TVector<ValueType>::SSI(int a)
+{
+	this->startIndex = a;
 }

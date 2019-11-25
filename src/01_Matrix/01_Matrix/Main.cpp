@@ -175,7 +175,7 @@ void UmVec()
 	try
 	{
 		C = A * v;
-		cout << C;
+		cout << C << endl;
 	}
 	catch (const char* osh)
 	{
@@ -257,12 +257,17 @@ void Pris()
 	cout << B;
 }
 
+void Zav()
+{
+	return;
+}
+
 int main()
 {
 	int n;
 	do
 	{
-		cout << "1 - Slozhenie" << endl << "2 - Vichitanie" << endl << "3 - Umnozhenie" << endl << "4 - Slozhenie s const" << endl << "5 - Vichitanie const" << endl << "6 - Umnozhenie na const" << endl << "7 - Umnozhenie na vector" << endl << "8 - Sravnenie na ravenstvo" << endl << "9 - Sravnenie na neravenstvo" << endl << "10 - Prisvaivanie" << endl;
+		cout << "1 - Slozhenie" << endl << "2 - Vichitanie" << endl << "3 - Umnozhenie" << endl << "4 - Slozhenie s const" << endl << "5 - Vichitanie const" << endl << "6 - Umnozhenie na const" << endl << "7 - Umnozhenie na vector" << endl << "8 - Sravnenie na ravenstvo" << endl << "9 - Sravnenie na neravenstvo" << endl << "10 - Prisvaivanie" << endl << "0 - Zavershit" << endl;
 		cin >> n;
 		switch (n)
 		{

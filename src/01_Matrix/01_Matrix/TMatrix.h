@@ -68,7 +68,10 @@ TMatrix<ValueType>& TMatrix<ValueType>::operator=(const TMatrix<ValueType> & mat
 		this->arr = new TVector<ValueType>[mat.size];
 	}
 	for (int i = 0; i < this->size; i++)
+	{
 		this->arr[i] = mat.arr[i];
+		this->arr[i].SSI(i);
+	}
 	return *this;
 }
 
@@ -135,12 +138,7 @@ bool TMatrix<ValueType>::operator==(const TMatrix & mat)const
 template<typename ValueType>
 bool TMatrix<ValueType>::operator!=(const TMatrix & mat)const
 {
-	if (this->size != mat.size)
-		return true;
-	for (int i = 0; i < this->size; i++)
-		if (this->arr[i] != mat.arr[i])
-			return true;
-	return false;
+	return (!(*this == mat));
 }
 
 template<typename ValueType>
