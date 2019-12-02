@@ -1,20 +1,20 @@
 #pragma once
 #include <math.h>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
 template <typename ValueType>
 class TVector
 {
-protected:
+public:
 	int size;
 	ValueType* arr;
 	int startIndex;
 public:
-	TVector();
-	TVector(int _size, int _startIndex);
-	TVector(const TVector&);
+	TVector(int _size = 10, int _startIndex = 0);
+	TVector(const TVector& vec);
 	~TVector();
 
 	ValueType Len() const;
@@ -32,6 +32,7 @@ public:
 
 	int GetStartInd() const;
 	int GetSize() const;
+	void SSI(int a);
 
 	friend istream& operator>>(istream& in, TVector<ValueType>& vec)
 	{
@@ -39,19 +40,21 @@ public:
 			in >> vec.arr[i];
 		return in;
 	}
-	friend ostream& operator<<(ostream & out, const TVector<ValueType> & vec)
+	friend ostream& operator<<(ostream& out, const TVector<ValueType>& vec)
 	{
 		for (int i = 0; i < vec.startIndex; i++)
-			out << "0 ";
-		for (int i = 0; i < vec.size; i++)
-			out << vec.arr[i] << " ";
+			out << setw(3) << setprecision(2) << right << " ";
+		for (int i = 0; i < vec.size - 1; i++)
+		{
+			out << setw(3) << setprecision(2) << right << vec.arr[i];
+		}
+		out << setw(3) << setprecision(2) << right << vec.arr[vec.size - 1];
 		return out;
+		out << setw(vec.startIndex);
 	}
 };
 
-template <typename ValueType>
-TVector<ValueType>::TVector()
-{}
+
 template <typename ValueType>
 TVector<ValueType>::TVector(int _size, int _startIndex)
 {
@@ -63,7 +66,7 @@ template <typename ValueType>
 TVector<ValueType>::TVector(const TVector<ValueType> & vec)
 {
 	this->size = vec.size;
-	this->startindex = vec.startindex;
+	this->startIndex = vec.startIndex;
 	this->arr = new ValueType[this->size];
 	for (int i = 0; i < this->size; i++)
 		this->arr[i] = vec.arr[i];
@@ -85,21 +88,23 @@ ValueType TVector<ValueType>::Len() const
 template <typename ValueType>
 TVector<ValueType>& TVector<ValueType>::operator=(const TVector<ValueType> & vec)
 {
-	if (vec == *this)
+	if (*this == vec)
 		return *this;
-	if (size != vec.size)
+	if (this->size != vec.size)
 	{
-		delete[] arr;
-		size = vec.size;
-		arr = new ValueType[size];
+		this->size = vec.size;
+		delete this->arr;
+		this->arr = new ValueType[this->size];
 	}
-	memcpy(vec.arr, arr, sizeof(ValueType) * size);
+	this->startIndex = vec.startIndex;
+	for (int i = 0; i < this->size; i++)
+		this->arr[i] = vec.arr[i];
 	return *this;
 }
 template <typename ValueType>
 TVector<ValueType> TVector<ValueType>::operator+(ValueType a)
 {
-	TVector<ValueType> rez(this->size);
+	TVector<ValueType> rez(*this);
 	for (int i = 0; i < this->size; i++)
 		rez.arr[i] += a;
 	return rez;
@@ -107,7 +112,7 @@ TVector<ValueType> TVector<ValueType>::operator+(ValueType a)
 template <typename ValueType>
 TVector<ValueType> TVector<ValueType>::operator-(ValueType a)
 {
-	TVector<ValueType> rez(this->size);
+	TVector<ValueType> rez(*this);
 	for (int i = 0; i < this->size; i++)
 		rez.arr[i] -= a;
 	return rez;
@@ -115,7 +120,7 @@ TVector<ValueType> TVector<ValueType>::operator-(ValueType a)
 template <typename ValueType>
 TVector<ValueType> TVector<ValueType>::operator*(ValueType a)
 {
-	TVector<ValueType> rez(this->size);
+	TVector<ValueType> rez(*this);
 	for (int i = 0; i < this->size; i++)
 		rez.arr[i] *= a;
 	return rez;
@@ -169,12 +174,7 @@ bool TVector<ValueType>::operator==(const TVector<ValueType>& vec)const
 template<typename ValueType>
 bool TVector<ValueType>::operator!=(const TVector<ValueType>& vec)const
 {
-	if ((this->size != vec.size) || (this->startIndex != vec.startIndex))
-		return true;
-	for (int i = 0; i < vec.size; i++)
-		if (this->arr[i] != vec.arr[i])
-			return true;
-	return false;
+	return (!(*this == vec));
 }
 template<typename ValueType>
 ValueType& TVector<ValueType>::operator[](int i)
@@ -199,4 +199,9 @@ template<typename ValueType>
 int TVector<ValueType>::GetSize()const
 {
 	return this->size;
+}
+template<typename ValueType>
+void TVector<ValueType>::SSI(int a)
+{
+	this->startIndex = a;
 }
