@@ -257,6 +257,41 @@ void Pris()
 	cout << B;
 }
 
+void Kop()
+{
+	cout << "Kopirovanie" << endl << "A(B)" << endl;
+	int n;
+	cout << "Size A = ";
+	cin >> n;
+	TMatrix<double> A(n);
+	cout << "A = " << endl;
+	cin >> A;
+	TMatrix<double> B(A);
+	cout << "B = " << endl;
+	cout << B;
+}
+
+void Priv()
+{
+	int n, k;
+	cout << "Razmer = " << endl;
+	cin >> n;
+	cout << "Start Index = " << endl;
+	cin >> k;
+	TVector<TVector<int>> G(n, k);
+	cout << "Vector Vectorov: " << endl;
+	for (int i = 0; i < n; i++)
+	{
+		G.arr[i] = TVector<int>(n - i, i);
+		cin >> G.arr[i];
+	}
+	cout << "G = " << endl;
+	cout << G << endl;
+	TMatrix<int> H(G);
+	cout << "H = " << endl;
+	cout << H;
+}
+
 void Zav()
 {
 	return;
@@ -267,7 +302,7 @@ int main()
 	int n;
 	do
 	{
-		cout << "1 - Slozhenie" << endl << "2 - Vichitanie" << endl << "3 - Umnozhenie" << endl << "4 - Slozhenie s const" << endl << "5 - Vichitanie const" << endl << "6 - Umnozhenie na const" << endl << "7 - Umnozhenie na vector" << endl << "8 - Sravnenie na ravenstvo" << endl << "9 - Sravnenie na neravenstvo" << endl << "10 - Prisvaivanie" << endl << "0 - Zavershit" << endl;
+		cout << "1 - Slozhenie" << endl << "2 - Vichitanie" << endl << "3 - Umnozhenie" << endl << "4 - Slozhenie s const" << endl << "5 - Vichitanie const" << endl << "6 - Umnozhenie na const" << endl << "7 - Umnozhenie na vector" << endl << "8 - Sravnenie na ravenstvo" << endl << "9 - Sravnenie na neravenstvo" << endl << "10 - Prisvaivanie" << endl << "11 - Kopirovanie" << endl << "12 - Prividenie" << endl << "0 - Zavershit" << endl;
 		cin >> n;
 		switch (n)
 		{
@@ -319,6 +354,16 @@ int main()
 		case 10:
 		{
 			Pris();
+			break;
+		}
+		case 11:
+		{
+			Kop();
+			break;
+		}
+		case 12:
+		{
+			Priv();
 			break;
 		}
 		}

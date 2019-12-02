@@ -8,7 +8,7 @@ using namespace std;
 template <typename ValueType>
 class TVector
 {
-protected:
+public:
 	int size;
 	ValueType* arr;
 	int startIndex;
