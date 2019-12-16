@@ -12,7 +12,7 @@ public:
 	TStack(const TStack<ValueType>& tmp);
 	~TStack();
 	void Push(ValueType c);
-	void Pop();
+	ValueType Pop();
 	ValueType Top() const;
 	TStack& operator=(const TStack& tmp);
 	bool IsFull()const;
@@ -54,7 +54,7 @@ void TStack<ValueType>::Push(ValueType c)
 }
 
 template<class ValueType>
-void TStack<ValueType>::Pop()
+ValueType TStack<ValueType>::Pop()
 {
 	if (this->IsEmpty())
 		throw "Empty";
@@ -67,4 +67,30 @@ ValueType TStack<ValueType>::Top() const
 	if (this->IsEmpty())
 		throw "Empty";
 	return arr[top];
+}
+
+template<class ValueType>
+TStack<ValueType>& TStack<ValueType>::operator=(const TStack<ValueType>& tmp)
+{
+	size = tmp.size;
+	top = tmp.top;
+	delete[] arr;
+	arr = new ValueType[size];
+	for (int i = 0; i < size; i++)
+	{
+		arr[i] = tmp.arr[i];
+	}
+	return *this;
+}
+
+template<class ValueType>
+bool TStack<ValueType>::IsFull() const
+{
+	return (top == size);
+}
+
+template<class ValueType>
+bool TStack<ValueType>::IsEmpty() const
+{
+	return (top == -1);
 }
