@@ -19,7 +19,7 @@ void main()
 	{
 		cout << osh << endl;
 	}
-	cout << "Postfix forma = " << endl;
+	cout << "Postfix form = " << endl;
 	cout << rez << endl;
 	double* ex = new double[rez.length()];
 	char* oper = new char[rez.length()];

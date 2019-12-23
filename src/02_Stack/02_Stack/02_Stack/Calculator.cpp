@@ -3,9 +3,10 @@
 
 bool Calculator::Prior(char a, char b)
 {
-	if (((a == '+' || a == '-') && (b == '*' || b == '/' || b == '+' || b == '-')) || ((a == '*' || a == '/') && (b == '*' || b == '/')))
-		return false;
-	return true;
+	if ((a == '*' || a == '/') && (b == '*' || b == '/')) return true;
+	if ((a == '+' || a == '-') && (b == '+' || b == '-')) return true;
+	if ((a == '+' || a == '-') && (b == '*' || b == '/')) return true;
+	return false;
 }
 
 double Calculator::Calc(double a, double b, char c)
@@ -36,10 +37,10 @@ string Calculator::CreatePostForm(const string& s)
 	if ((s[0] == '+') || (s[0] == '-') || (s[0] == '*') || (s[0] == '/')) throw "Invalid";
 	if (s[s.length() - 1] == '+' || s[s.length() - 1] == '-' || s[s.length() - 1] == '*' || s[s.length() - 1] == '/') throw "Invalid";
 	for (int i = 0; i < s.length(); i++)
-		if (s[i] == '1' || s[i] == '2' || s[i] == '3' || s[i] == '4' || s[i] == '5' || s[i] == '6' || s[i] == '7' || s[i] == '8' || s[i] == '9' || s[i] == '0')
+		if ((s[i] == '1') || (s[i] == '2') || (s[i] == '3') || (s[i] == '4') || (s[i] == '5') || (s[i] == '6') || (s[i] == '7') || (s[i] == '8') || (s[i] == '9') || (s[i] == '0'))
 			throw "Invalid";
-	for (int i = 1; i < s.length(); i++)
-		if ((s[i] != '+') && (s[i] != '-') && (s[i] != '*') && (s[i] != '/') && (s[i] != '(') && (s[i] != ')') && (s[i - 1] != '+') && (s[i - 1] != '-') && (s[i - 1] != '*') && (s[i - 1] != '/') && (s[i - 1] != '(') && (s[i - 1] != ')'))
+	for (int j = 1; j < s.length(); j++)
+		if ((s[j] != '+') && (s[j] != '-') && (s[j] != '*') && (s[j] != '/') && (s[j] != '(') && (s[j] != ')') && (s[j - 1] != '+') && (s[j - 1] != '-') && (s[j - 1] != '*') && (s[j - 1] != '/') && (s[j - 1] != '(') && (s[j - 1] != ')'))
 			throw "Invalid";
 	for (int i = 1; i < s.length(); i++)
 		if (((s[i] == '+') || (s[i] == '-') || (s[i] == '*') || (s[i] == '/')) && ((s[i - 1] == '+') || (s[i - 1] == '-') || (s[i - 1] == '*') || (s[i - 1] == '/')))
@@ -88,7 +89,7 @@ double Calculator::Calculate(const string& s, const double* a, const char* c, in
 	TStack<double> L(d);
 	for (int i = 0; i < s.length(); i++)
 	{
-		if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/')
+		if ((s[i] == '+') || (s[i] == '-') || (s[i] == '*') || (s[i] == '/'))
 		{
 			double first = L.Pop();
 			double second = L.Pop();

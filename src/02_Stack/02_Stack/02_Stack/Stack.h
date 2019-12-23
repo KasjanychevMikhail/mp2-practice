@@ -56,16 +56,16 @@ void TStack<ValueType>::Push(ValueType c)
 template<class ValueType>
 ValueType TStack<ValueType>::Pop()
 {
-	if (this->IsEmpty())
-		throw "Empty";
-	top--;
+	//if (this->IsEmpty())
+	//	throw "Empty";
+	return arr[top--];
 }
 
 template<class ValueType>
 ValueType TStack<ValueType>::Top() const
 {
-	if (this->IsEmpty())
-		throw "Empty";
+	//if (this->IsEmpty())
+	//	throw "Empty";
 	return arr[top];
 }
 
