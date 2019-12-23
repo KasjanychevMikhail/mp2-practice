@@ -127,7 +127,7 @@ void Calculator::GetOper(const string& s, double*& a, char*& c, int d)
 			if (W == 0)
 			{
 				c[P] = s[i];
-				cout << "Enter " << s[i] << ": ";
+				cout << "Vvod " << s[i] << ": ";
 				cin >> a[P];
 				P++;
 			}
