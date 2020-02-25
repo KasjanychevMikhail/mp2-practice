@@ -12,7 +12,7 @@ public:
 	TStack(const TStack<ValueType>& tmp);
 	~TStack();
 	void Push(ValueType c);
-	ValueType Pop();
+	ValueType Pop(); //void
 	ValueType Top() const;
 	TStack& operator=(const TStack& tmp);
 	bool IsFull()const;
