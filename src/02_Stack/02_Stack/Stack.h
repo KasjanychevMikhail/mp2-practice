@@ -12,7 +12,7 @@ public:
 	TStack(const TStack<ValueType>& tmp);
 	~TStack();
 	void Push(ValueType c);
-	ValueType Pop(); //void
+	void Pop();
 	ValueType Top() const;
 	TStack& operator=(const TStack& tmp);
 	bool IsFull()const;
@@ -54,11 +54,11 @@ void TStack<ValueType>::Push(ValueType c)
 }
 
 template<class ValueType>
-ValueType TStack<ValueType>::Pop()
+void TStack<ValueType>::Pop()
 {
 	if (this->IsEmpty())
 		throw "Empty";
-	return arr[top--];
+	top--;
 }
 
 template<class ValueType>
