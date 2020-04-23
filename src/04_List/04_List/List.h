@@ -58,16 +58,16 @@ public:
     TList();
     TList(const TList&);
     TList(TNode<Tkey, TData>* list);
-    ~TList;
+    ~TList();
 
     void Next();
     void Reset();
     bool IsEnded() const;
     void Back(Tkey _key, TData* pData);
     TNode<Tkey, TData>* Search(Tkey _key);
-    void push(Tkey _key, TData* pData);
-    void insertAfter(Tkey, TData*, Tkey);
-    void insertBefore(Tkey, TData*, Tkey);
+    void Push(Tkey _key, TData* pData);
+    void InsertAfter(Tkey, TData*, Tkey);
+    void InsertBefore(Tkey, TData*, Tkey);
     void Remove(Tkey);
 
     friend ostream& operator<<(ostream& out, TList<Tkey, TData>& list) {
@@ -104,6 +104,127 @@ TList<Tkey, TData>::TList(const TList<Tkey, TData>& list) {
     TNode<Tkey, TData>* node = list.pFirst;
     node = node->pNext;
     while (node != NULL) {
-
+        pCurr->pNext = new TNode<Tkey, TData>(*node);
+        pCurr = pCurr->pNext;
+        node = node->pNext;
     }
+    Reset();
+}
+
+template <class Tkey, class TData>
+TList<Tkey, TData>::~TList() {
+    Reset();
+    while (!IsEnded()) pCurr.Remove(pFirst->key);
+}
+
+template <class Tkey, class TData>
+bool TList<Tkey, TData>::IsEnded() const {
+    return pCurr == NULL;
+}
+
+template <class Tkey, class TData>
+void TList<Tkey, TData>::Next() {
+    if (IsEnded()) return;
+    pPrev = pCurr;
+    pCurr = pCurr->pNext;
+    if (pNext != NULL) pNext = pNext->pNext;
+}
+
+template <class Tkey, class TData>
+void TList<Tkey, TData>::Reset() {
+    pPrev = 0;
+    pCurr = pFirst;
+    if (pFirst != NULL) pNext = pCurr->pNext;
+    else pNext = NULL;
+}
+
+template <class Tkey, class TData>
+void TList<Tkey, TData>::Back(Tkey _key, TData* _pData) {
+    if (pFirst == NULL) {
+        pFirst = new TNode<Tkey, TData>(_key, _pData);
+        pCurr = pFirst;
+        return;
+    }
+    TNode<Tkey, TData>* _pPrev = pPrev;
+    TNode<Tkey, TData>* _pCurr = pCurr;
+    TNode<Tkey, TData>* _pNext = pNext;
+    while (!IsEnded()) Next();
+    pCurr = new TNode<Tkey, TData>(_key, _pData);
+    pPrev->pNext = pCurr;
+    pPrev = _pPrev;
+    pCurr = _pCurr;
+    pNext = _pNext;
+}
+
+template <class Tkey, class TData>
+TNode<Tkey, TData>* TList<Tkey, TData>::Search(Tkey _key) {
+    Reset();
+    while (!IsEnded()) {
+        if (pCurr->key == _key) return pCurr;
+        Next();
+    }
+    Reset();
+    return NULL;
+}
+
+template <class Tkey, class TData>
+void TList<Tkey, TData>::Push(Tkey _key, TData* _pData) {
+    TNode<Tkey, TData>* tmp = new TNode<Tkey, TData>(_key, _pData, pFirst);
+    if (pCurr == pFirst) pPrev = tmp;
+    pFirst = tmp;
+}
+
+template <class Tkey, class TData>
+void TList<Tkey, TData>::InsertAfter(Tkey _key, TData* _pData, Tkey key1) {
+    if (pFirst == NULL) throw "osh";
+    TNode<Tkey, TData>* _pPrev = pPrev;
+    TNode<Tkey, TData>* _pCurr = pCurr;
+    TNode<Tkey, TData>* _pNext = pNext;
+    if (Search(key1) == 0) {
+        pPrev = _pPrev;
+        pCurr = _pCurr;
+        pNext = _pNext;
+        return;
+    }
+    TNode<Tkey, TData>* tmp = new TNode<Tkey, TData>(_key, _pData, pNext);
+    pCurr->pNext = tmp;
+    pPrev = _pPrev;
+    pCurr = _pCurr;
+    pNext = _pNext;
+}
+
+template <class Tkey, class TData>
+void TList<Tkey, TData>::InsertBefore(Tkey _key, TData* _pData, Tkey key1) {
+    if (pFirst == NULL) throw "osh";
+    TNode<Tkey, TData>* _pPrev = pPrev;
+    TNode<Tkey, TData>* _pCurr = pCurr;
+    TNode<Tkey, TData>* _pNext = pNext;
+    if (Search(key1) == 0) {
+        pPrev = _pPrev;
+        pCurr = _pCurr;
+        pNext = _pNext;
+        return;
+    }
+    if (pFirst == pCurr) {
+        TNode<Tkey, TData>* tmp = new TNode<Tkey, TData>(_key, _pData, pFirst);
+        if (_pCurr == pFirst) pPrev = tmp;
+        else {
+            pPrev = _pPrev;
+            pCurr = _pCurr;
+            pNext = _pNext;
+        }
+        pFirst = tmp;
+        return;
+    }
+    TNode<Tkey, TData>* tmp = new TNode<Tkey, TData>(_key, _pData, pCurr);
+    pPrev->pNext = tmp;
+    pPrev = _pPrev;
+    pCurr = _pCurr;
+    pNext = _pNext;
+}
+
+template <class Tkey, class TData>
+void TList<Tkey, TData>::Remove(Tkey _key) {
+    if (pFirst == NULL) throw "osh";
+
 }
