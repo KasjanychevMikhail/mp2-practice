@@ -22,7 +22,7 @@ public:
 
 template<class Tkey, class TData>
 TNode<Tkey, TData>::TNode() {
-    pData = new pData;
+    pData = new TData;
     pNext = NULL;
 }
 
@@ -114,7 +114,11 @@ TList<Tkey, TData>::TList(const TList<Tkey, TData>& list) {
 template <class Tkey, class TData>
 TList<Tkey, TData>::~TList() {
     Reset();
-    while (!IsEnded()) pCurr.Remove(pFirst->key);
+    while (!IsEnded()) {
+        delete pCurr->pData;
+        Next();
+    }
+    pFirst = NULL;
 }
 
 template <class Tkey, class TData>
@@ -226,5 +230,34 @@ void TList<Tkey, TData>::InsertBefore(Tkey _key, TData* _pData, Tkey key1) {
 template <class Tkey, class TData>
 void TList<Tkey, TData>::Remove(Tkey _key) {
     if (pFirst == NULL) throw "osh";
-
+    TNode<Tkey, TData>* _pPrev = pPrev;
+    TNode<Tkey, TData>* _pCurr = pCurr;
+    TNode<Tkey, TData>* _pNext = pNext;
+    if (Search(_key) == 0) {
+        pPrev = _pPrev;
+        pCurr = _pCurr;
+        pNext = _pNext;
+        return;
+    }
+    if (pFirst == pCurr) {
+        if (pNext != NULL) pNext = pNext->pNext;
+        pCurr = pNext;
+        delete pFirst;
+        pFirst = pCurr;
+        return;
+    }
+    if (_pCurr == pCurr) {
+        delete pCurr;
+        pCurr = _pNext;
+        if (pNext != NULL) pNext = pNext->pNext;
+        pPrev->pNext = pCurr;
+        return;
+    }
+    pPrev->pNext = pCurr->pNext;
+    delete pCurr;
+    pCurr = pNext;
+    if (pNext != NULL) pNext = pNext->pNext;
+    pPrev = _pPrev;
+    pCurr = _pCurr;
+    pNext = _pNext;
 }
