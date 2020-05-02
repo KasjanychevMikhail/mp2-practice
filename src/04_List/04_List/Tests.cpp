@@ -57,7 +57,6 @@ void TestPush() {
 void TestInsertAfter() {
     setlocale(LC_ALL, "Russian");
     cout << "TestInsertAfter" << endl;
-    cout << "TestPush" << endl;
     int size;
     cout << "Размер: " << endl;
     cin >> size;
@@ -91,7 +90,6 @@ void TestInsertAfter() {
 void TestInsertBefore() {
     setlocale(LC_ALL, "Russian");
     cout << "TestInsertAfter" << endl;
-    cout << "TestPush" << endl;
     int size;
     cout << "Размер: " << endl;
     cin >> size;
@@ -124,7 +122,7 @@ void TestInsertBefore() {
 
 void TestBack() {
     setlocale(LC_ALL, "Russian");
-    cout << "TestPush" << endl;
+    cout << "TestBack" << endl;
     int size;
     cout << "Размер: " << endl;
     cin >> size;
@@ -150,7 +148,7 @@ void TestBack() {
 
 void TestCopy() {
     setlocale(LC_ALL, "Russian");
-    cout << "TestPush" << endl;
+    cout << "TestCopy" << endl;
     int size;
     cout << "Размер: " << endl;
     cin >> size;
@@ -172,7 +170,7 @@ void TestCopy() {
 
 void TestRemove() {
     setlocale(LC_ALL, "Russian");
-    cout << "TestPush" << endl;
+    cout << "TestRemove" << endl;
     int size;
     cout << "Размер: " << endl;
     cin >> size;

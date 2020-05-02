@@ -136,7 +136,7 @@ void TList<Tkey, TData>::Next() {
 
 template <class Tkey, class TData>
 void TList<Tkey, TData>::Reset() {
-    pPrev = 0;
+    pPrev = NULL;
     pCurr = pFirst;
     if (pFirst != NULL) pNext = pCurr->pNext;
     else pNext = NULL;
@@ -229,7 +229,10 @@ void TList<Tkey, TData>::InsertBefore(Tkey _key, TData* _pData, Tkey key1) {
 
 template <class Tkey, class TData>
 void TList<Tkey, TData>::Remove(Tkey _key) {
-    if (pFirst == NULL) throw "osh";
+    if (pFirst == NULL) {
+        throw "osh";
+        return;
+    }
     TNode<Tkey, TData>* _pPrev = pPrev;
     TNode<Tkey, TData>* _pCurr = pCurr;
     TNode<Tkey, TData>* _pNext = pNext;

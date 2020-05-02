@@ -46,8 +46,6 @@ void main() {
             rezh = -1;
             break;
         }
-        default:
-            break;
         }
     } while (rezh != 0);
 }
